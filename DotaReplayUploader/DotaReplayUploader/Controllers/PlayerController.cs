@@ -21,6 +21,9 @@ namespace DotaReplayUploader.Controllers
     public class PlayerController : BaseSteamController
     {
         
+        /*
+         * Searches the steam community for a player.
+         */ 
         [Route("api/dota/search/player")]
         [HttpGet]
         public async Task<Player[]> SearchPlayer(string playerName)

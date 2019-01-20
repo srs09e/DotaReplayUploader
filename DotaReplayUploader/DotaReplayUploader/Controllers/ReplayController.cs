@@ -14,7 +14,9 @@ namespace DotaReplayUploader.Controllers
 {
     public class ReplayController : BaseSteamController
     {
-
+        /*
+         * Adds a replay to the upload queue. 
+         */
         [Route("api/dota/replay/queueMatches")]
         [HttpPost]
         public async Task<IHttpActionResult> QueueReplay(HttpRequestMessage request)
@@ -25,7 +27,7 @@ namespace DotaReplayUploader.Controllers
             List<Match> newMatches = new List<Match>();
 
             /*
-           * For each player in the results find their steam ID
+           * Add each match sent.
            */
             foreach (JToken matchToken in matches)
             {
@@ -35,6 +37,10 @@ namespace DotaReplayUploader.Controllers
             return Ok();
         }
 
+        /*
+         * Returns the current replay queue. 
+         * 
+         */
         [Route("api/dota/replay/queueMatches")]
         [HttpGet]
         public async Task<MatchReplayProgress[]> GetCurrentQueue()
@@ -49,6 +55,10 @@ namespace DotaReplayUploader.Controllers
         }
     }
 
+
+    /*
+     * Place holder class that simulates progress to the client.
+     */
     public static class ReplayCreator
     {
         public static Queue<MatchReplayProgress> Matches = new Queue<MatchReplayProgress>();
