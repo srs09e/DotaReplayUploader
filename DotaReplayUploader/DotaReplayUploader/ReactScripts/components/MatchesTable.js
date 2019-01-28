@@ -17,7 +17,7 @@ export class MatchesTable extends React.Component {
                 return <div>
                     <div className="inline-flex">
                         <video loop autoPlay className="playerTableCellImage" src={this.findPlayerHero(row.original)} typeof="video/webm" />
-                        <div className="block">
+                        <div className="block"  style={{width:100}}>
                             <img className="playerTableCellImageSmall" src={row.original.SearchedPlayer.AvatarUrl} />
                             <p className="playerTableCellTextSmallSpacing"> {row.original.SearchedPlayer.Alias} </p>
                         </div>
