@@ -22,9 +22,11 @@ class App extends Component {
         return (
             <div>
                 <div className="splitLeft">
-                    <SearchBox 
-                        onEnterKeyPressed={() => this.queryForPlayers()}
-                    />
+                    <div style={{paddingTop:10}}>
+                        <SearchBox 
+                            onEnterKeyPressed={() => this.queryForPlayers()}
+                        />
+                    </div>
                     <QueryButton 
                         buttonText="Player Search"
                         onClick={() => this.queryForPlayers()}

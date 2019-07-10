@@ -2,3 +2,6 @@ DotaReplayUploader/DotaReplayUploader/Scripts/node_modules
 DotaReplayUploader/packages
 DotaReplayUploader/DotaReplayUploader/bin
 DotaReplayUploader/DotaReplayUploader/obj
+DotaReplayUploader/.vs
+DotaReplayUploader/DotaReplayUploader/ReactScripts/node_modules
+DotaReplayUploader/DotaReplayUploader/NodeScripts/node_modules

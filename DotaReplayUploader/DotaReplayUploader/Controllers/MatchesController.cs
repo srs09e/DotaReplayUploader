@@ -17,14 +17,14 @@ namespace DotaReplayUploader.Controllers
 
         [Route("api/dota/search/matches/players")]
         [HttpPost]
-        public async Task<Match[]> GetReplaysViaPlayers(HttpRequestMessage request)
+        public async Task<DotaMatch[]> GetReplaysViaPlayers(HttpRequestMessage request)
         {
             string jsonString = await request.Content.ReadAsStringAsync();
             JArray players = JArray.Parse(jsonString);
 
             await GetHeroes();
 
-            List<Match> newMatches = new List<Match>();
+            List<DotaMatch> newMatches = new List<DotaMatch>();
             /*
            * For each player in the results find their steam ID
            */
@@ -37,7 +37,7 @@ namespace DotaReplayUploader.Controllers
                 JArray matchResults = (JArray)JToken.Parse(content)["result"]["matches"];
                 foreach (JToken matchToken in matchResults)
                 {
-                    Match match = new Match(matchToken);
+                    DotaMatch match = new DotaMatch(matchToken);
                     foreach (MatchPlayer matchPlayer in match.Players)
                     {
                         matchPlayer.Hero = HeroMap[matchPlayer.HeroId];
@@ -47,13 +47,18 @@ namespace DotaReplayUploader.Controllers
                 }
             }
 
-            List<Match> sortedMatches = newMatches.OrderBy(o => o.DateTimeStartTime).Reverse().ToList();
+            List<DotaMatch> sortedMatches = newMatches.OrderBy(o => o.DateTimeStartTime).Reverse().ToList();
             return sortedMatches.ToArray();
         }
 
         [Route("api/dota/search/matches")]
         [HttpGet]
         public async Task<MatchDetails> GetMatchDetails(string matchId)
+        {
+            return await GetDetailsFromMatch(matchId);
+        }
+
+        public static async Task<MatchDetails> GetDetailsFromMatch(string matchId)
         {
             HttpResponseMessage response = await client.GetAsync(GetMatchDetailsEndpoint + "&match_id=" + matchId + "&include_persona_names=1");
             string content = await response.Content.ReadAsStringAsync();

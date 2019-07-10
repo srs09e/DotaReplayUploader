@@ -7,9 +7,9 @@ using System.Web;
 
 namespace DotaReplayUploader.Models
 {
-    public class Match
+    public class DotaMatch
     {
-        public Match(JToken jObject)
+        public DotaMatch(JToken jObject)
         {
             MatchId = (string)jObject["match_id"];
             MatchSeqNum = (string)jObject["match_seq_num"];
@@ -29,7 +29,7 @@ namespace DotaReplayUploader.Models
             Players = newPlayerList.ToArray();
 
         }
-        public Match() { }
+        public DotaMatch() { }
 
         public string MatchId;
         public string MatchSeqNum;
@@ -55,7 +55,7 @@ namespace DotaReplayUploader.Models
         public string PlayerSlot;
     }
 
-    public class MatchDetails : Match
+    public class MatchDetails : DotaMatch
     {
         public MatchDetails(JToken jToken) : base(jToken)
         {
@@ -63,6 +63,7 @@ namespace DotaReplayUploader.Models
             Duration = (string)jToken["duration"];
             RadiantScore = (string)jToken["radiant_score"];
             DireScore = (string)jToken["dire_score"];
+            Cluster = (int)jToken["cluster"];
         }
         public MatchDetails() : base() { }
 
@@ -70,6 +71,7 @@ namespace DotaReplayUploader.Models
         public string Duration;
         public string RadiantScore;
         public string DireScore;
+        public int Cluster;
     }
 
     public class MatchDetailsPlayer : MatchPlayer
@@ -106,5 +108,7 @@ namespace DotaReplayUploader.Models
 
         public int ProgressPercentage;
         public bool Done;
+        public string Status;
+        public string VideoUrl;
     }
 }
